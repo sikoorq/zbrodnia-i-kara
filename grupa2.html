@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grupa 2 - Zbrodnia i Kara</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f5f5f5;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+            --border-color: #ddd;
+            --button-bg: #007bff;
+            --button-hover: #0056b3;
+            --accent: #6c63ff;
+        }
+
+        body.dark-mode {
+            --bg-primary: #1e1e1e;
+            --bg-secondary: #2d2d2d;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --border-color: #444;
+            --button-bg: #0d6efd;
+            --button-hover: #0a58ca;
+            --accent: #8b84ff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background-color 0.3s, color 0.3s;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .title-section h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--accent), var(--button-bg));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1em;
+        }
+
+        .header-controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .back-button {
+            padding: 10px 25px;
+            font-size: 1em;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 2px solid var(--accent);
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .back-button:hover {
+            background: var(--accent);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--bg-secondary);
+            padding: 8px 15px;
+            border-radius: 25px;
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .theme-toggle span {
+            font-size: 1.5em;
+        }
+
+        .content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .group-title {
+            font-size: 2em;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        .group-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            font-size: 1.1em;
+        }
+
+        .question-card {
+            background: var(--bg-secondary);
+            border-left: 4px solid var(--accent);
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+
+        .question-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .question-number {
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            font-size: 1.05em;
+        }
+
+        .answer-space {
+            background: var(--bg-primary);
+            border: 1px dashed var(--border-color);
+            min-height: 100px;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            color: var(--text-secondary);
+        }
+
+        .sub-question {
+            margin-left: 20px;
+            margin-top: 10px;
+            padding-left: 15px;
+            border-left: 2px solid var(--border-color);
+        }
+
+        .sub-question-label {
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .sub-answer-space {
+            background: var(--bg-primary);
+            border: 1px dashed var(--border-color);
+            min-height: 60px;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 8px;
+            margin-bottom: 15px;
+        }
+
+        /* Print Styles */
+        @media print {
+            header, .back-button, .theme-toggle {
+                display: none;
+            }
+            .question-card {
+                page-break-inside: avoid;
+            }
+        }
+
+        .answer-input {
+            width: 100%;
+            min-height: 80px;
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1em;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            resize: vertical;
+            margin-top: 10px;
+            transition: border-color 0.3s;
+        }
+
+        .answer-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1);
+        }
+
+        .sub-answer-input {
+            width: 100%;
+            min-height: 50px;
+            padding: 10px;
+            border: 2px solid var(--border-color);
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 0.95em;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            resize: vertical;
+            margin-top: 8px;
+            transition: border-color 0.3s;
+        }
+
+        .sub-answer-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1);
+        }
+
+        .check-button-container {
+            text-align: center;
+            margin: 50px 0 30px 0;
+        }
+
+        .check-button {
+            padding: 15px 60px;
+            font-size: 1.2em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+        }
+
+        .check-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+        }
+
+        .check-button:active {
+            transform: translateY(0);
+        }
+
+        .check-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .results-container {
+            display: none;
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            border: 2px solid #4caf50;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+            animation: slideIn 0.3s ease-in;
+        }
+
+        .results-container.dark-mode {
+            background: linear-gradient(135deg, #1b5e20, #2e7d32);
+            border-color: #66bb6a;
+        }
+
+        .results-container.show {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .results-title {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #1b5e20;
+            margin-bottom: 20px;
+        }
+
+        .dark-mode .results-title {
+            color: #a5d6a7;
+        }
+
+        .results-score {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #2e7d32;
+            margin: 20px 0;
+        }
+
+        .dark-mode .results-score {
+            color: #81c784;
+        }
+
+        .results-percentage {
+            font-size: 1.5em;
+            color: #558b2f;
+            margin: 15px 0 20px 0;
+        }
+
+        .dark-mode .results-percentage {
+            color: #aed581;
+        }
+
+        .results-feedback {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            text-align: left;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .dark-mode .results-feedback {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .feedback-item {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-left: 4px solid #2e7d32;
+            background: white;
+            border-radius: 4px;
+        }
+
+        .dark-mode .feedback-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-left-color: #81c784;
+        }
+
+        .feedback-question {
+            font-weight: 600;
+            color: #1b5e20;
+            margin-bottom: 8px;
+        }
+
+        .dark-mode .feedback-question {
+            color: #a5d6a7;
+        }
+
+        .feedback-status {
+            font-size: 0.9em;
+            margin: 5px 0;
+        }
+
+        .feedback-correct {
+            color: #2e7d32;
+        }
+
+        .feedback-partial {
+            color: #f57f17;
+        }
+
+        .feedback-incorrect {
+            color: #c62828;
+        }
+
+.correct-answer {
+            color: #1b1b1b;
+        }
+
+        body.dark-mode .correct-answer {
+            color: #ffffff;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .title-section h1 {
+                font-size: 2em;
+            }
+
+            .group-title {
+                font-size: 1.6em;
+            }
+
+            .back-button {
+                padding: 8px 15px;
+                font-size: 0.9em;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+
+            .header-controls {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .answer-input, .sub-answer-input {
+                font-size: 16px;
+            }
+
+            .check-button {
+                padding: 12px 40px;
+                font-size: 1.1em;
+                width: 100%;
+            }
+
+            .results-container {
+                padding: 20px;
+            }
+
+            .results-score {
+                font-size: 2em;
+            }
+
+            .results-percentage {
+                font-size: 1.2em;
+            }
+
+            .results-feedback {
+                max-height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="title-section">
+            <h1>📚 Zbrodnia i Kara</h1>
+            <div class="subtitle">Karty pracy - Fiodor Dostojewski</div>
+        </div>
+        <div class="header-controls">
+            <a href="index.html" class="back-button">← Menu</a>
+            <div class="theme-toggle" id="themeToggle">
+                <span id="themeIcon">🌙</span>
+                <span id="themeLabel">Ciemny</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="content">
+        <h2 class="group-title">Grupa 2</h2>
+        <p class="group-subtitle">Fiodor Dostojewski - Zbrodnia i Kara</p>
+
+        <div class="question-card">
+            <div class="question-number">1. Jak kończą się losy:</div>
+            <div class="question-text">
+                <div class="sub-question">
+                    <div class="sub-question-label">a) Marmieładowa</div>
+                    <textarea class="sub-answer-input" data-question="1a"></textarea>
+                </div>
+                <div class="sub-question">
+                    <div class="sub-question-label">b) Pulcherii Aleksandrowny</div>
+                    <textarea class="sub-answer-input" data-question="1b"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-number">2. W jaki sposób Raskolnikowowi udało się uciec z miejsca zbrodni?</div>
+            <textarea class="answer-input" data-question="2"></textarea>
+        </div>
+
+        <div class="question-card">
+            <div class="question-number">3. W jaki sposób Dunia weszła w posiadanie trzech tysięcy rubli?</div>
+            <textarea class="answer-input" data-question="3"></textarea>
+        </div>
+
+        <div class="question-card">
+            <div class="question-number">4. W jakich okolicznościach Swidrygajłow:</div>
+            <div class="question-text">
+                <div class="sub-question">
+                    <div class="sub-question-label">a) dowiedział się o zbrodni popełnionej przez Raskolnikowa</div>
+                    <textarea class="sub-answer-input" data-question="4a"></textarea>
+                </div>
+                <div class="sub-question">
+                    <div class="sub-question-label">b) spotkał się z Dunią</div>
+                    <textarea class="sub-answer-input" data-question="4b"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-number">5. W jakich okolicznościach miało miejsce pierwsze spotkanie:</div>
+            <div class="question-text">
+                <div class="sub-question">
+                    <div class="sub-question-label">a) Soni i Duni</div>
+                    <textarea class="sub-answer-input" data-question="5a"></textarea>
+                </div>
+                <div class="sub-question">
+                    <div class="sub-question-label">b) Raskolnikowa i Łużyna</div>
+                    <textarea class="sub-answer-input" data-question="5b"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-number">6. Przedstaw historię Duni, odpowiadając na poniższe pytania:</div>
+            <div class="question-text">
+                <div class="sub-question">
+                    <div class="sub-question-label">a) o co została oskarżona Dunia</div>
+                    <textarea class="sub-answer-input" data-question="6a"></textarea>
+                </div>
+                <div class="sub-question">
+                    <div class="sub-question-label">b) w jaki sposób wyszła na jaw jej niewinność</div>
+                    <textarea class="sub-answer-input" data-question="6b"></textarea>
+                </div>
+                <div class="sub-question">
+                    <div class="sub-question-label">c) jakie były konsekwencje tego zdarzenia</div>
+                    <textarea class="sub-answer-input" data-question="6c"></textarea>
+                </div>
+                <div class="sub-question">
+                    <div class="sub-question-label">d) w jaki sposób Raskolnikow dowiedział się o tych faktach</div>
+                    <textarea class="sub-answer-input" data-question="6d"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-number">7. Jakie relacje łączyły:</div>
+            <div class="question-text">
+                <div class="sub-question">
+                    <div class="sub-question-label">a) Sonię i Katarzynę Iwanownę</div>
+                    <textarea class="sub-answer-input" data-question="7a"></textarea>
+                </div>
+                <div class="sub-question">
+                    <div class="sub-question-label">b) Dunię i Pulcherię Aleksandrownę</div>
+                    <textarea class="sub-answer-input" data-question="7b"></textarea>
+                </div>
+                <div class="sub-question">
+                    <div class="sub-question-label">c) Alonę i Lizawietę</div>
+                    <textarea class="sub-answer-input" data-question="7c"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="check-button-container">
+            <button class="check-button" id="checkButton">✓ Sprawdź odpowiedzi</button>
+        </div>
+
+        <div class="results-container" id="resultsContainer">
+            <div class="results-title">📊 Wyniki sprawdzenia</div>
+            <div class="results-score" id="resultScore">0/15</div>
+            <div class="results-percentage" id="resultPercentage">0%</div>
+            <div class="results-feedback" id="resultFeedback"></div>
+        </div>
+    </div>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeLabel = document.getElementById('themeLabel');
+
+        // Check for saved theme preference or default to light mode
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        if (currentTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeIcon.textContent = '☀️';
+            themeLabel.textContent = 'Jasny';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            themeIcon.textContent = isDarkMode ? '☀️' : '🌙';
+            themeLabel.textContent = isDarkMode ? 'Jasny' : 'Ciemny';
+            updateResultsTheme();
+        });
+
+        function updateResultsTheme() {
+            const resultsContainer = document.getElementById('resultsContainer');
+            if (resultsContainer.classList.contains('show')) {
+                resultsContainer.classList.toggle('dark-mode', document.body.classList.contains('dark-mode'));
+            }
+        }
+
+        // Answer verification system
+        const expectedAnswers = {
+            '1a': ['pijanym', 'powóz', 'ulicy', 'umiera', 'rodzina', 'księdz'],
+            '1b': ['obłęd', 'niepokój', 'syn', 'granica', 'umiera', 'gorączka', 'zesłanie'],
+            '2': ['uwięziony', 'mieszkania', 'mężczyzn', 'stróża', 'wymknął', 'remontowanym', 'pokój', 'schodach'],
+            '3': ['odziedziczyła', 'testament', 'Marfa', 'rekompensata', 'szacunek', 'pomówienia'],
+            '4a': ['pokój', 'sąsiadujący', 'ścianę', 'rozmowa', 'Rodion', 'morderstwo'],
+            '4b': ['Petersburgu', 'podstęp', 'dowody', 'zeznania', 'łaskawa'],
+            '5a': ['zaproszenie', 'stypę', 'pokój', 'Dunię', 'Pulcherię', 'głośnotę', 'szacunek', 'prostytutka'],
+            '5b': ['odwiedził', 'chory', 'pokój', 'wymądrzać', 'charakter', 'wygonił'],
+            '6a': ['Marfa', 'uwieść', 'Swidrygajłow', 'guwernantka'],
+            '6b': ['list', 'propozycje', 'pokazała', 'przesledowa', 'odrzucała'],
+            '6c': ['zrozumiała', 'błąd', 'chwalić', 'cnotę', 'reklama', 'Łużyn', 'rękę'],
+            '6d': ['list', 'matka', 'Pulcheria'],
+            '7a': ['macocha', 'druga', 'żona', 'ojca', 'Marmieładowa'],
+            '7b': ['matka', 'Duni', 'Rodiona'],
+            '7c': ['przyrodnie', 'siostry', 'ojca', 'Alona', 'Lizawiet', 'traktowa', 'praca', 'bita']
+        };
+
+        const correctAnswers = {
+            '1a': 'Będąc pijanym, wpada pod koła rozpędzonego powozu konnego na ulicy i umiera w swoim domu w otoczeniu rodziny i z wezwanym księdzem.',
+            '1b': 'Popada w obłęd z niepokoju o syna (wmówiono jej, że Rodion wyjechał w ważnych sprawach państwowych za granicę) i niedługo potem umiera w gorączce/malignie, nie dowiadując się prawdy o jego zbrodni i zesłaniu.',
+            '2': 'Kiedy Raskolnikow był uwięziony w mieszkaniu lichwiarki (ponieważ dobijało się tam dwóch mężczyzn), ci odeszli na chwilę po stróża. Raskolnikow wymknął się wtedy z mieszkania i ukrył się w pustym, aktualnie remontowanym lokalu piętro niżej, dzięki czemu uniknął zauważenia na schodach.',
+            '3': 'Odziedziczyła te pieniądze. Zostały jej zapisane w testamencie przez zmarłą Marfę Pietrownę (żonę Swidrygajłowa) jako rekompensata i wyraz szacunku za wcześniejsze niesłuszne pomówienia.',
+            '4a': 'Wynajął pokój sąsiadujący przez cienką ścianę z pokojem Soni. Siedząc tam, podsłuchał dramatyczną rozmowę, podczas której Rodion przyznał się Soni do morderstwa obu kobiet.',
+            '4b': 'Spotkał ją w Petersburgu i podstępem ściągnął do swojego pokoju, twierdząc, że ma dowody na zbrodnię jej brata, a jego zeznania mogą uratować Rodiona, jeśli Dunia będzie dla niego "łaskawa" (chciał wymusić na niej uległość).',
+            '5a': 'Sonia przyszła z zaproszeniem na stypę do wynajmowanego przez Rodiona pokoju. Zastała tam Dunię i Pulcherię. Dunia bardzo grzecznie, z szacunkiem ukłoniła się Soni na pożegnanie, co było dla Soni wielkim zaskoczeniem (jako prostytutka nie była przyzwyczajona do szacunku).',
+            '5b': 'Łużyn odwiedził Rodiona po raz pierwszy, gdy ten leżał chory u siebie w pokoju po dokonaniu morderstwa. Łużyn próbował się wymądrzać i zgrywać postępowego człowieka, ale Rodion szybko przejrzał jego płytki charakter, zdenerwował się i go wygonił.',
+            '6a': 'Przez Marfę Pietrownę o to, że próbowała uwieść jej męża (Swidrygajłowa). Dunia pracowała u nich jako guwernantka.',
+            '6b': 'Swidrygajłow napisał do Duni list z niestosownymi propozycjami. Dunia pokazała go Marfie Pietrownie, co było ostatecznym dowodem, że to Swidrygajłow ją prześladował, a ona go kategorycznie odrzucała.',
+            '6c': 'Marfa Pietrowna zrozumiała swój błąd i zaczęła we wszystkich domach w okolicy głośno chwalić cnotę Duni i opowiadać o jej niewinności. Dzięki tej "reklamie" Dunią zainteresował się Łużyn i poprosił o jej rękę.',
+            '6d': 'Przeczytał o wszystkim w długim liście, który otrzymał na początku powieści od swojej matki, Pulcherii Aleksandrowny.',
+            '7a': 'Katarzyna Iwanowna to macocha Soni (druga żona ojca Soni, Marmieładowa).',
+            '7b': 'Pulcheria to matka Duni (i Rodiona).',
+            '7c': 'Były przyrodnimi siostrami (miały wspólnego ojca). Alona traktowała młodszą Lizawietę bardzo źle, zmuszała do ciężkiej pracy i ją biła.'
+        };
+
+        const maxPoints = Object.keys(expectedAnswers).length;
+
+        const checkButton = document.getElementById('checkButton');
+        const resultsContainer = document.getElementById('resultsContainer');
+        const resultScore = document.getElementById('resultScore');
+        const resultPercentage = document.getElementById('resultPercentage');
+        const resultFeedback = document.getElementById('resultFeedback');
+
+        checkButton.addEventListener('click', async () => {
+            const answers = {};
+            document.querySelectorAll('[data-question]').forEach(textarea => {
+                answers[textarea.dataset.question] = textarea.value.toLowerCase().trim();
+            });
+
+            checkButton.disabled = true;
+            checkButton.innerHTML = '<span class="loading-spinner"></span> Sprawdzanie...';
+
+            // Simulate AI processing
+            await new Promise(resolve => setTimeout(resolve, 1500));
+
+            const results = evaluateAnswers(answers);
+            displayResults(results);
+
+            checkButton.disabled = false;
+            checkButton.innerHTML = '✓ Sprawdź odpowiedzi';
+        });
+
+        function evaluateAnswers(answers) {
+            const results = [];
+            let totalPoints = 0;
+
+            for (const [question, expectedKeywords] of Object.entries(expectedAnswers)) {
+                const userAnswer = answers[question] || '';
+                const keywords = expectedKeywords;
+                
+                let matched = 0;
+                let totalKeywords = keywords.length;
+
+                for (const keyword of keywords) {
+                    if (userAnswer.includes(keyword)) {
+                        matched++;
+                    }
+                }
+
+                let score = 0;
+                let status = '❌ Nieprawidłowa';
+
+                if (userAnswer.length === 0) {
+                    score = 0;
+                    status = '⚠️ Brak odpowiedzi';
+                } else if (matched >= Math.ceil(totalKeywords * 0.6)) {
+                    score = 1;
+                    status = '✅ Prawidłowa';
+                    totalPoints += 1;
+                } else if (matched >= Math.ceil(totalKeywords * 0.3)) {
+                    score = 0.5;
+                    status = '⚠️ Częściowo prawidłowa';
+                    totalPoints += 0.5;
+                }
+
+                results.push({
+                    question: question,
+                    answer: userAnswer,
+                    score: score,
+                    status: status,
+                    expectedKeywords: expectedKeywords.join(', ')
+                });
+            }
+
+            return {
+                points: totalPoints,
+                maxPoints: maxPoints,
+                percentage: Math.round((totalPoints / maxPoints) * 100),
+                details: results
+            };
+        }
+
+        function displayResults(results) {
+            resultScore.textContent = `${results.points.toFixed(1)}/${results.maxPoints}`;
+            resultPercentage.textContent = `${results.percentage}%`;
+
+            let feedbackHTML = '';
+            results.details.forEach((detail, index) => {
+                const questionNum = detail.question.replace(/([0-9]+)([a-z])/g, '$1$2');
+                feedbackHTML += `
+                    <div class="feedback-item">
+                        <div class="feedback-question">Pytanie ${questionNum}</div>
+                        <div class="feedback-status">
+                            <span class="feedback-${detail.score === 1 ? 'correct' : detail.score === 0.5 ? 'partial' : 'incorrect'}">
+                                ${detail.status}
+                            </span>
+                        </div>
+                        <div style="font-size: 0.9em; margin-top: 8px; color: var(--text-secondary);">
+                            <strong>Twoja odpowiedź:</strong> "<em>${detail.answer || '(brak)'}</em>"
+                        </div>
+                        <div class="correct-answer" style="font-size: 0.9em; margin-top: 6px; background: rgba(46, 125, 50, 0.1); padding: 8px; border-radius: 4px;">
+                            <strong>✓ Prawidłowa odpowiedź:</strong> ${correctAnswers[detail.question] || 'Brak odpowiedzi'}
+                        </div>
+                    </div>
+                `;
+            });
+
+            resultFeedback.innerHTML = feedbackHTML;
+            resultsContainer.classList.add('show');
+            resultsContainer.classList.toggle('dark-mode', document.body.classList.contains('dark-mode'));
+            
+            // Scroll to results
+            resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    </script>
+</body>
+</html>

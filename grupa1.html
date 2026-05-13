@@ -622,39 +622,39 @@
 
         // Answer verification system
         const expectedAnswers = {
-            '1a': ['samobójstwo', 'strzelił', 'przepaść', 'śmierć'],
-            '1b': ['umiera', 'choroba', 'nie wiedz', 'boleść'],
-            '2': ['ogłoszenie', 'mieszkanie', 'gazeta', 'wiadomość', 'przyjaciela', 'siostra'],
-            '3': ['uczył', 'studiował', 'wysyłał', 'przekazywał', 'przeznaczył'],
-            '4a': ['list', 'matka', 'naprowadzeni', 'zrozumiała'],
-            '4b': ['skandal', 'luzhin', 'oskarżenie', 'ujawni'],
-            '5a': ['włamanie', 'przychodzenie', 'rozmowa', 'spotkanie', 'podejrzenie'],
-            '5b': ['spotkanie', 'odwiedzi', 'wizyta', 'rozmowa'],
-            '6a': ['kradzież', 'portfel', 'pieniądze', 'oskarżenie'],
-            '6b': ['ujawnić', 'zakomunikować', 'objawy', 'demaskacja'],
-            '6c': ['portmonetka', 'pieniądze', 'znalezi', 'dowód'],
-            '6d': ['przyznał', 'sam przyznał', 'wygadał', 'oszustwo odkryte', 'wyznał'],
-            '7a': ['ojciec', 'powiązane', 'więź', 'relacja rodzinna', 'rodzina'],
-            '7b': ['miłość', 'zaangażowanie', 'wsparcie', 'związek'],
-            '7c': ['służba', 'opiekunka', 'naniania', 'opiekun']
+            '1a': ['samobójstwo', 'strzel', 'rewolwer', 'Achilles', 'ulicy'],
+            '1b': ['zmysły', 'rozpaczy', 'dzieci', 'śpiewanie', 'gruźlicy', 'suchot', 'krew'],
+            '2': ['Sęnny', 'Lizawiet', 'handlarze', 'rodzin', 'sam', 'lichwiark'],
+            '3': ['Marmieładow', 'pogrzeb', 'pomoc', 'ubrania', 'Razumichin'],
+            '4a': ['Swidrygajłow', 'mieszkania', 'podslucha', 'wyznanie', 'Soni'],
+            '4b': ['spotkanie', 'Raskolnikow', 'Razumichin', 'ultimatum', 'rodzin', 'arogancko'],
+            '5a': ['Porfirego', 'Razumichinem', 'rzeczy', 'zastawit', 'dyskusja', 'artykuł'],
+            '5b': ['Sonia', 'pogrzeb', 'stypę', 'zawstydzona', 'Dunię', 'Pulcherię', 'rezerwt', 'wrażenie'],
+            '6a': ['kradzież', 'banknot'],
+            '6b': ['stypa', 'Marmieładowa', 'publiczny', 'upokorzy', 'skompromitowa', 'rodzin'],
+            '6c': ['banknot', 'rubli', 'kieszeni', 'przeszukania'],
+            '6d': ['Lebieziatnikow', 'współlokator', 'podslucha', 'banknot', 'styp', 'demaskowa'],
+            '7a': ['córka', 'pierwszy', 'małżeństwo', 'Marmieładowa'],
+            '7b': ['przyjacielem', 'Rodiona', 'pobrali', 'mąż'],
+            '7c': ['małżeństwem', 'Marfa', 'śmierci', 'Swidrygajłow']
         };
 
         const correctAnswers = {
-            '1a': 'Swidrygajłow popełnia samobójstwo - strzela sobie w głowę',
-            '1b': 'Katarzyna Iwanowna umiera na gruźlicę, nie wiedząc jaką zbrodnię popełnił jej syn',
-            '2': 'Z ogłoszenia w gazecie o wynajmie mieszkania, gdzie mieszka lichwiarka',
-            '3': 'Na pomoc Dunii i matce - wysyła im pieniądze',
-            '4a': 'Z listu od matki, którą odwiedził Łużyn (który się wygadał)',
-            '4b': 'Po ujawnieniu intrygi Łużyna - skandal skłonił ją do zerwania zaręczyn',
-            '5a': 'Gdy przybywa Porfirej do Raskolnikowa podczas jego choroby (po zbrodni)',
-            '5b': 'Pulcheria Aleksandrowna (matka Duni) odwiedza Sonię w jej mieszkaniu',
-            '6a': 'O kradzieży pieniędzy - stwierdził że Sonia ukradła portfel',
-            '6b': 'Zorganizował spotkanie u siebie, aby podrzucić pieniądze i oskarżyć Sonię',
-            '6c': 'Portmonetka z pieniędzmi, którą sam podrzucił Soni',
-            '6d': 'Swidrygajłow przyznał się, że to było oszustwo - chciał ją upokurzyć',
-            '7a': 'Sonia jest córką Marmieładowa - więź rodzinna, ojciec i córka',
-            '7b': 'Dunię i Razumichina łączy miłość i wzajemne wsparcie',
-            '7c': 'Marfa Pietrówna to opiekunka i niania Swidrygajłowa z dzieciństwa'
+            '1a': 'Popełnia samobójstwo – strzela do siebie z rewolweru na ulicy, na oczach strażaka (Achillesa).',
+            '1b': 'Traci zmysły z biedy i rozpaczy, zmusza dzieci do śpiewania i tańczenia na ulicy. Niedługo potem umiera z powodu zaawansowanej gruźlicy (suchot), dławiąc się krwią.',
+            '2': 'Całkiem przypadkiem na placu Siennym usłyszał rozmowę Lizawiety z handlarzami (mieszczaninem i jego żoną). Dowiedział się z niej, że następnego dnia o siódmej wieczorem Lizawieta ma przyjść do nich w interesach, co oznaczało, że w tym czasie Alona Iwanowna (lichwiarka) będzie w domu sama.',
+            '3': 'Zamiast wydać je na siebie, dużą ich część oddał po cichu rodzinie Marmieładowów po śmierci Marmieładowa (na organizację pogrzebu i pomoc wdowie). Resztę za pośrednictwem Razumichina wydał na nowe, w miarę porządne ubrania.',
+            '4a': 'Od Swidrygajłowa, który zwabił ją do swojego mieszkania. Opowiedział jej wszystko, ponieważ wcześniej podsłuchał wyznanie Rodiona, gdy ten przyznawał się Soni.',
+            '4b': 'Miało to miejsce podczas burzliwego spotkania, na którym obecny był też Raskolnikow, Razumichin i Pulcheria. Łużyn zachowywał się arogancko, postawił Duni ultimatum (kazał wybierać między nim a bratem) i obrażał jej rodzinę.',
+            '5a': 'Rodion poszedł do Porfirego Pietrowicza z Razumichinem. Pretekstem do wizyty była chęć odzyskania rzeczy, które Raskolnikow wcześniej zastawił u zamordowanej lichwiarki. Wtedy też wywiązała się długa, psychologiczna dyskusja m.in. o artykule Raskolnikowa o zbrodni.',
+            '5b': 'Sonia przyszła do pokoju Raskolnikowa zaprosić go na pogrzeb swojego ojca i na stypę. Była zawstydzona i skromna. Zastała tam Dunię i Pulcherię. Matka Raskolnikowa początkowo odniosła się do niej z rezerwą, ale Sonia zrobiła na nich dobre wrażenie.',
+            '6a': 'O kradzież sturublowego banknotu.',
+            '6b': 'Miało to miejsce podczas stypy po śmierci Marmieładowa. Łużyn wykorzystał ten publiczny moment, aby publicznie upokorzyć Sonię i skompromitować Rodiona w oczach jego rodziny.',
+            '6c': 'Banknot (100 rubli) wypadł z kieszeni Soni, gdy Łużyn zażądał jej przeszukania.',
+            '6d': 'Świadkiem był współlokator Łużyna – Lebieziatnikow. Widział, jak Łużyn w swoim pokoju dyskretnie wsunął banknot do kieszeni Soni, gdy ta u niego była. Zdemaskował go na stypie.',
+            '7a': 'Sonia to córka Marmieładowa z pierwszego małżeństwa.',
+            '7b': 'Razumichin był bliskim przyjacielem brata Duni (Rodiona), ostatecznie Dunia i Razumichin pobrali się.',
+            '7c': 'Byli małżeństwem. Swidrygajłow prawdopodobnie przyczynił się do jej nagłej śmierci.'
         };
 
         const maxPoints = Object.keys(expectedAnswers).length;
